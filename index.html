@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Exotic Services - Premium Vendor Network</title>
+    <title>Exotic Services - Secure Vendor Access</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Inter:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script src="https://js.stripe.com/v3/"></script>
@@ -67,81 +67,12 @@
             color: white;
         }
 
-        .scroll-indicator {
-            position: absolute;
-            bottom: 20px;
-            font-size: 0.8rem;
-            animation: bounce 2s infinite;
-        }
-
-        /* Payment Section */
-        .payment-section {
+        /* Product Sections */
+        .product-section {
             padding: 4rem 2rem;
-            background: var(--background);
         }
 
-        .payment-container {
-            max-width: 800px;
-            margin: 0 auto;
-            background: #1e1e1e;
-            border-radius: 20px;
-            padding: 2rem;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
-        }
-
-        .payment-form {
-            display: grid;
-            gap: 1.5rem;
-        }
-
-        .form-group {
-            position: relative;
-        }
-
-        .form-group input {
-            width: 100%;
-            padding: 1rem;
-            background: #2d2d2d;
-            border: 2px solid transparent;
-            border-radius: 10px;
-            color: white;
-            transition: all 0.3s;
-        }
-
-        .form-group input:focus {
-            border-color: var(--accent);
-            outline: none;
-        }
-
-        .payment-submit {
-            background: linear-gradient(45deg, var(--accent), var(--secondary));
-            border: none;
-            padding: 1rem;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: transform 0.3s;
-        }
-
-        .payment-submit:hover {
-            transform: scale(1.05);
-        }
-
-        .payment-success {
-            display: none;
-            text-align: center;
-            padding: 2rem;
-            background: #1e1e1e;
-            border-radius: 15px;
-            animation: appear 0.5s ease-out;
-        }
-
-        /* Reviews Section */
-        .reviews {
-            padding: 4rem 2rem;
-            background: var(--background);
-        }
-
-        .review-grid {
+        .product-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
@@ -149,45 +80,76 @@
             margin: 0 auto;
         }
 
-        .review-card {
+        .product-card {
             background: #1e1e1e;
             padding: 2rem;
             border-radius: 15px;
-            position: relative;
             transition: transform 0.3s;
         }
 
-        .review-card::before {
-            content: '“';
-            position: absolute;
-            top: -20px;
-            left: 20px;
-            font-size: 4rem;
-            color: var(--accent);
-            opacity: 0.2;
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .product-description {
+            margin: 1.5rem 0;
+            color: #ccc;
+        }
+
+        /* Payment Modal */
+        .payment-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .payment-container {
+            background: #1e1e1e;
+            padding: 2rem;
+            border-radius: 20px;
+            width: 100%;
+            max-width: 500px;
+            animation: appear 0.5s ease-out;
+        }
+
+        .payment-form {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .payment-security {
+            text-align: center;
+            margin: 1.5rem 0;
+            color: #888;
         }
 
         /* Footer */
-        footer .server-name {
-            color: var(--accent);
-            font-weight: 600;
+        footer {
+            background: var(--primary);
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .security-badge {
+            margin-top: 1rem;
+            color: #4CAF50;
         }
 
         /* Animations */
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
-            40% {transform: translateY(-15px);}
-            60% {transform: translateY(-7px);}
-        }
-
         @keyframes appear {
             from {
                 opacity: 0;
-                transform: translateY(20px);
+                transform: scale(0.9);
             }
             to {
                 opacity: 1;
-                transform: translateY(0);
+                transform: scale(1);
             }
         }
 
@@ -208,44 +170,58 @@
     <section class="hero">
         <div class="hero-content animate-up">
             <h1>Exotic Services</h1>
-            <p>Premium Apple + Nike Quality Vendor Network</p>
+            <p>Secure Access to Premium Apple/Nike-Grade Vendors</p>
             <div class="cta-buttons">
-                <a href="#payment" class="btn btn-vip">Get VIP Access $40</a>
-                <a href="#payment" class="btn btn-standard">Single Vendor $10</a>
+                <a href="#products" class="btn btn-vip">View Products</a>
             </div>
         </div>
-        <div class="scroll-indicator">▼ Scroll Down ▼</div>
     </section>
 
-    <!-- VIP Benefits -->
-    <section class="vip-benefits">
+    <!-- Product Section -->
+    <section class="product-section" id="products">
         <div class="animate-up">
-            <h2>VIP Privileges</h2>
-            <div class="benefits-grid">
-                <div class="benefit-card">
-                    <i class="fas fa-infinity"></i>
-                    <h3>Lifetime Mentorship</h3>
+            <h2>Membership Options</h2>
+            <div class="product-grid">
+                <!-- VIP Product -->
+                <div class="product-card">
+                    <h3>VIP Access</h3>
+                    <div class="product-price">$40</div>
+                    <div class="product-description">
+                        <ul>
+                            <li>Unlimited lifetime mentorship</li>
+                            <li>Exclusive active community chat</li>
+                            <li>Premium/leaked vendors access</li>
+                            <li>Physical receipt access</li>
+                            <li>Receipt generator tool</li>
+                        </ul>
+                    </div>
+                    <button class="btn btn-vip" onclick="showPayment('VIP Access', 4000)">Buy Now</button>
                 </div>
-                <div class="benefit-card">
-                    <i class="fas fa-comment-dots"></i>
-                    <h3>Exclusive Chat</h3>
-                </div>
-                <div class="benefit-card">
-                    <i class="fas fa-box-open"></i>
-                    <h3>Premium Vendors</h3>
-                </div>
-                <div class="benefit-card">
-                    <i class="fas fa-receipt"></i>
-                    <h3>Receipt Access</h3>
+                
+                <!-- Single Vendor Product -->
+                <div class="product-card">
+                    <h3>Single Vendor</h3>
+                    <div class="product-price">$10</div>
+                    <div class="product-description">
+                        <ul>
+                            <li>Access to 1 premium vendor</li>
+                            <li>Basic support</li>
+                            <li>Standard receipt access</li>
+                        </ul>
+                    </div>
+                    <button class="btn btn-standard" onclick="showPayment('Single Vendor', 1000)">Buy Now</button>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Payment Section -->
-    <section class="payment-section" id="payment">
-        <div class="payment-container animate-up">
+    <!-- Payment Modal -->
+    <div class="payment-modal" id="paymentModal">
+        <div class="payment-container">
             <h2>Secure Payment</h2>
+            <div class="payment-security">
+                <i class="fas fa-lock"></i> Encrypted & Secure
+            </div>
             <form id="payment-form" class="payment-form">
                 <div class="form-group">
                     <input type="text" id="name" placeholder="Full Name" required>
@@ -255,10 +231,10 @@
                 </div>
                 <div class="form-group">
                     <div id="card-element">
-                        <!-- Stripe Card Element will be inserted here -->
+                        <!-- Stripe Card Element -->
                     </div>
                 </div>
-                <button class="payment-submit btn" id="submit">
+                <button class="payment-submit btn btn-vip" id="submit">
                     <span id="button-text">Pay Now</span>
                 </button>
             </form>
@@ -268,30 +244,7 @@
                 <p>Thank you for your purchase. Check your email for confirmation.</p>
             </div>
         </div>
-    </section>
-
-    <!-- Reviews Section -->
-    <section class="reviews">
-        <div class="animate-up">
-            <h2>Client Testimonials</h2>
-            <div class="review-grid">
-                <!-- Review placeholders -->
-                <div class="review-card">
-                    <div class="review-text">
-                        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum."
-                    </div>
-                    <div class="review-author">
-                        <div class="avatar"></div>
-                        <div>
-                            <div class="name">Client Name</div>
-                            <div class="position">CEO @Company</div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Repeat for other reviews -->
-            </div>
-        </div>
-    </section>
+    </div>
 
     <!-- Footer -->
     <footer>
@@ -300,12 +253,8 @@
                 <h3>Contact Exotic Services</h3>
                 <p>support@exoticservices.com</p>
             </div>
-            <div class="social">
-                <a href="#"><i class="fab fa-twitter"></i></a>
-                <a href="#"><i class="fab fa-instagram"></i></a>
-            </div>
-            <div class="server-name">
-                &copy; 2024 Exotic Services. All rights reserved.
+            <div class="security-badge">
+                <i class="fas fa-lock"></i> SSL Secured 256-bit Encryption
             </div>
         </div>
     </footer>
@@ -329,13 +278,16 @@
             },
         });
 
-        cardElement.mount('#card-element');
+        let selectedProduct = null;
+
+        function showPayment(productName, amount) {
+            selectedProduct = { name: productName, amount };
+            document.getElementById('paymentModal').style.display = 'flex';
+            cardElement.mount('#card-element');
+        }
 
         // Payment Form Handling
-        const form = document.getElementById('payment-form');
-        const successMessage = document.getElementById('payment-success');
-
-        form.addEventListener('submit', async (e) => {
+        document.getElementById('payment-form').addEventListener('submit', async (e) => {
             e.preventDefault();
 
             const { paymentMethod, error } = await stripe.createPaymentMethod({
@@ -350,20 +302,30 @@
             if (error) {
                 alert(error.message);
             } else {
-                // Send paymentMethod.id to your server
-                // This is a simplified example - implement proper backend integration
+                // Send payment details to server
                 fetch('/create-payment-intent', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ payment_method: paymentMethod.id }),
+                    body: JSON.stringify({
+                        payment_method: paymentMethod.id,
+                        amount: selectedProduct.amount,
+                        product: selectedProduct.name
+                    }),
                 })
                 .then(response => response.json())
                 .then(data => {
                     if (data.success) {
-                        form.style.display = 'none';
-                        successMessage.style.display = 'block';
+                        document.getElementById('payment-form').style.display = 'none';
+                        document.getElementById('payment-success').style.display = 'block';
                     }
                 });
+            }
+        });
+
+        // Close modal on outside click
+        document.getElementById('paymentModal').addEventListener('click', (e) => {
+            if (e.target === document.getElementById('paymentModal')) {
+                document.getElementById('paymentModal').style.display = 'none';
             }
         });
 
