@@ -3,406 +3,639 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Exotic Services</title>
+    <title>Hackercoder Competition Winner - Ismael P</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/countup.js/2.6.2/countUp.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <style>
-        @font-face {
-            font-family: 'SF Pro Heavy';
-            src: url('fonts/SF-Pro-Display-Heavy.otf') format('opentype');
-            font-weight: 900;
-            font-style: normal;
-            font-display: swap;
-        }
-
-        @font-face {
-            font-family: 'SF Pro';
-            src: url('fonts/SF-Pro-Display-Regular.otf') format('opentype');
-            font-weight: 400;
-            font-style: normal;
-            font-display: swap;
-        }
-
-        :root {
-            --primary: #000;
-            --secondary: #fff;
-            --accent: #3a0ca3;
-            --text: #1a1a1a;
-            --discord: #5865F2;
-        }
-
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'SF Pro', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-family: 'Poppins', sans-serif;
         }
 
         body {
-            background: var(--secondary);
-            color: var(--text);
-            scroll-behavior: smooth;
-            line-height: 1.6;
+            background: #0a0a0a;
+            color: #fff;
+            overflow-x: hidden;
         }
 
-        #hero {
-            height: 100vh;
-            background: linear-gradient(rgba(255,255,255,0.95), rgba(255,255,255,0.95)),
-                        url('https://images.unsplash.com/photo-1587620962725-016a1e06d078') center/cover fixed;
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            text-align: center;
-            padding: 0 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, #000000, #1a1a1a);
+            z-index: -1;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%239C92AC' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.1;
+            z-index: -1;
         }
 
         .hero-content {
-            max-width: 1200px;
-            width: 100%;
+            text-align: center;
+            opacity: 0;
+            transform: translateY(30px);
         }
 
-        .hero-content h1 {
-            font-family: 'SF Pro Heavy', sans-serif;
-            font-weight: 900;
-            font-size: 5.5rem;
-            letter-spacing: -0.03em;
-            margin-bottom: 1.5rem;
-            animation: heroText 2s ease-out;
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            margin-bottom: 1rem;
+            background: linear-gradient(90deg, #ff4d4d, #f9cb28);
+            -webkit-background-clip: text;
+            color: transparent;
         }
 
-        .hero-content p {
-            font-size: 1.375rem;
-            max-width: 600px;
-            margin: 0 auto 2rem;
-            animation: fadeIn 2s ease-out;
-            animation-delay: 0.5s;
+        .hero p {
+            font-size: clamp(1rem, 2vw, 1.5rem);
+            color: #888;
+            margin-bottom: 2rem;
         }
 
-        .scroll-down {
-            position: absolute;
-            bottom: 40px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 1.75rem;
-            animation: bounce 2s infinite;
-            color: var(--text);
+        /* Competition Section */
+        .competition {
+            padding: 100px 0;
+            background: #111;
         }
 
-        /* Discord Button */
-        .discord-cta {
-            display: inline-block;
-            background: var(--discord);
-            color: white;
-            padding: 1rem 2rem;
-            border-radius: 10px;
-            font-weight: 700;
-            margin-top: 2rem;
-            transition: transform 0.3s ease;
-            text-decoration: none;
-        }
-
-        .discord-cta:hover {
-            transform: translateY(-3px);
-        }
-
-        /* Product Sections */
-        .product-section {
-            padding: 8rem 2rem;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .product-grid {
+        .competition-content {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
+            opacity: 0;
+            transform: translateY(30px);
         }
 
-        .product-card {
-            background: white;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .product-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
-        }
-
-        .product-card img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-            transition: transform 0.3s ease;
-        }
-
-        .product-card:hover img {
-            transform: scale(1.05);
-        }
-
-        .card-content {
-            padding: 1.5rem;
-        }
-
-        .card-content h3 {
-            font-size: 1.5rem;
-            margin-bottom: 0.5rem;
-            font-weight: 700;
-        }
-
-        .card-content p {
-            color: #666;
-            margin-bottom: 1rem;
-        }
-
-        .price {
-            font-size: 1.25rem;
-            color: var(--accent);
-            font-weight: 700;
-        }
-
-        /* Features Section */
-        #features {
-            background: #f5f5f7;
-        }
-
-        .feature-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .feature-item {
-            text-align: center;
-            padding: 2rem;
-            background: white;
-            border-radius: 15px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .feature-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-        }
-
-        .feature-icon {
-            font-size: 2.5rem;
-            color: var(--accent);
-            margin-bottom: 1rem;
-        }
-
-        /* Receipt Section */
-        #receipt {
+        .competition-card {
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.03));
+            padding: 3rem;
+            border-radius: 24px;
+            backdrop-filter: blur(10px);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             position: relative;
-            padding: 8rem 2rem;
-        }
-
-        .receipt-container {
-            display: flex;
-            align-items: center;
-            gap: 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .receipt-image {
-            flex: 1;
-            border-radius: 15px;
             overflow: hidden;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
         }
 
-        .receipt-image img {
+        .competition-card h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.75rem;
+            margin-bottom: 1.75rem;
+            background: linear-gradient(90deg, #ff4d4d, #f9cb28);
+            -webkit-background-clip: text;
+            color: transparent;
+            letter-spacing: -0.02em;
+            font-weight: 700;
+        }
+
+        .competition-card p {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 1.75rem;
+            letter-spacing: 0.01em;
+        }
+
+        .competition-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .competition-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
             width: 100%;
-            height: 400px;
+            height: 100%;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(255, 255, 255, 0.1),
+                transparent
+            );
+            transition: 0.5s;
+        }
+
+        .competition-card:hover::before {
+            left: 100%;
+        }
+
+
+        /* Winner Section */
+        .winner {
+            padding: 100px 0;
+            position: relative;
+        }
+
+        .winner-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 4rem;
+            align-items: center;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .profile-image {
+            width: 100%;
+            max-width: 400px;
+            aspect-ratio: 1;
             object-fit: cover;
-            transition: transform 0.3s ease;
+            border-radius: 50%;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255, 77, 77, 0.3);
+            filter: brightness(1.1) contrast(1.1);
         }
 
-        .receipt-content {
-            flex: 1;
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
         }
 
-        /* Footer */
-        footer {
-            background: var(--primary);
-            color: white;
-            padding: 4rem 2rem;
-            text-align: center;
+        .profile-image-container {
+            position: relative;
+            animation: float 4s ease-in-out infinite;
         }
 
-        .social-icons {
+        .profile-image:hover {
+            transform: scale(1.02);
+        }
+
+        .winner-details h2 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            margin-bottom: 1rem;
+            background: linear-gradient(90deg, #ff4d4d, #f9cb28);
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+
+        .prize-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2rem;
+            border-radius: 15px;
             margin-top: 2rem;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
         }
 
-        .social-icons a {
-            margin: 0 1rem;
-            color: white;
-            font-size: 1.2rem;
-            transition: color 0.3s ease;
+        .prize-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,77,77,0.1) 0%, transparent 70%);
+            animation: rotate 10s linear infinite;
         }
 
-        /* Animations */
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
-            40% { transform: translateX(-50%) translateY(-20px); }
-            60% { transform: translateX(-50%) translateY(-10px); }
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+        .prize-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(90deg, #ff4d4d, #f9cb28);
+            -webkit-background-clip: text;
+            color: transparent;
         }
 
-        @keyframes heroText {
-            from { 
-                opacity: 0;
-                transform: translateY(40px) scale(0.95);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0) scale(1);
-            }
+        .github-button {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: linear-gradient(90deg, #ff4d4d, #f9cb28);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 600;
+            margin-top: 2rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
         }
 
+        .github-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, #f9cb28, #ff4d4d);
+            opacity: 0;
+            z-index: -1;
+            transition: opacity 0.3s ease;
+        }
+
+        .github-button:hover::before {
+            opacity: 1;
+        }
+
+        .github-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(255, 77, 77, 0.2);
+        }
+
+        /* Responsive Design */
         @media (max-width: 768px) {
-            .hero-content h1 { font-size: 3.75rem; }
-            .feature-grid { grid-template-columns: 1fr; }
-            .receipt-container { flex-direction: column; }
+            .container {
+                padding: 0 15px;
+            }
+
+            .winner-content {
+                gap: 2rem;
+            }
+        }
+
+        /* Particle Animation */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .particle {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            pointer-events: none;
         }
     </style>
 </head>
 <body>
+    <div class="particles"></div>
+
     <!-- Hero Section -->
-    <section id="hero">
-        <div class="hero-content">
-            <h1>EXOTIC SERVICES</h1>
-            <p>Premium business solutions for modern entrepreneurs.</p>
-            <div class="scroll-down">↓</div>
-            <a href="https://discord.gg/8kgBUsAsBA" class="discord-cta" target="_blank">Join our Community</a>
-        </div>
-    </section>
-
-    <!-- Product Sections -->
-    <section id="products" class="product-section">
-        <div class="product-grid">
-            <div class="product-card">
-                <img src="https://img.freepik.com/premium-vector/street-vendor-with-food-cart-illustration_95264-2862.jpg?semt=ais_hybrid" alt="Brand Vendors">
-                <div class="card-content">
-                    <h3>Brand Vendors</h3>
-                    <p>Access replica products from top brands like Nike and Apple for fractions of the cost</p>
-                    <div class="price">Starting at $10.99</div>
-                </div>
-            </div>
-            
-            <div class="product-card">
-                <img src="https://i.ytimg.com/vi/a2Ad6ZPd59k/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLD61EiE_F7w2y3XO3rqjTbuMfCd8Q" alt="Receipt Generator">
-                <div class="card-content">
-                    <h3>Receipt Generator</h3>
-                    <p>Create professional, branded receipts for over 20 sites. Make sure you sell.</p>
-                    <div class="price">From $40.99</div>
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Hackercoder Competition Winner</h1>
+                <p>Celebrating excellence in game development with our Spider-Man Clone Challenge</p>
+                <div style="margin-top: 2rem; display: flex; gap: 2rem; justify-content: center; align-items: center;">
+                    <div style="text-align: center;">
+                        <div id="participants" style="font-family: 'Space Grotesk', sans-serif; font-size: 2.5rem; font-weight: bold; background: linear-gradient(90deg, #ff4d4d, #f9cb28); -webkit-background-clip: text; color: transparent;">0</div>
+                        <div style="color: rgba(255, 255, 255, 0.7); font-size: 1rem; margin-top: 0.5rem; letter-spacing: 0.5px;">Participants</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <div id="days" style="font-family: 'Space Grotesk', sans-serif; font-size: 2.5rem; font-weight: bold; background: linear-gradient(90deg, #ff4d4d, #f9cb28); -webkit-background-clip: text; color: transparent;">0</div>
+                        <div style="color: rgba(255, 255, 255, 0.7); font-size: 1rem; margin-top: 0.5rem; letter-spacing: 0.5px;">Days</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <div id="prize" style="font-family: 'Space Grotesk', sans-serif; font-size: 2.5rem; font-weight: bold; background: linear-gradient(90deg, #ff4d4d, #f9cb28); -webkit-background-clip: text; color: transparent;">0</div>
+                        <div style="color: rgba(255, 255, 255, 0.7); font-size: 1rem; margin-top: 0.5rem; letter-spacing: 0.5px;">Prize Pool</div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Features Section -->
-    <section id="features" class="product-section">
-        <div class="feature-grid">
-            <div class="feature-item">
-                <div class="feature-icon">⚡</div>
-                <h3>Fast Delivery</h3>
-                <p>Tracking Number within 72 hours</p>
-            </div>
-            <div class="feature-item">
-                <div class="feature-icon">🛡️</div>
-                <h3>Secure Payments</h3>
-                <p>Transactions processed via Stripe, so we cannot see.</p>
-            </div>
-            <div class="feature-item">
-                <div class="feature-icon">💼</div>
-                <h3>Dedicated Support</h3>
-                <p>24/7 customer success team, 1:1 Guidance</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Receipt Demo Section -->
-    <section id="receipt">
-        <div class="receipt-container">
-            <div class="receipt-image">
-                <img src="https://images.unsplash.com/photo-1588943211346-95d3b7a4a0f3" alt="Receipt Example">
-            </div>
-            <div class="receipt-content">
-                <h2>Professional Receipts Made Easy</h2>
-                <p>Create Apple-themed receipts with our intuitive platform:</p>
-                <ul>
-                    <li>Customizable templates</li>
-                    <li>Automatic tax calculations</li>
-                    <li>Multi-currency support</li>
-                    <li>Instant PDF generation</li>
-                </ul>
-                <a href="#" class="cta-button">Try Free for 14 Days</a>
+    <!-- Competition Section -->
+    <section class="competition">
+        <div class="container">
+            <div class="competition-content">
+                <div class="competition-card">
+                    <h3>The Challenge</h3>
+                    <p>Create a 2D Spider-Man clone that captures the essence of web-slinging mechanics and fluid movement. This intense 2-week competition challenged developers to build a complete game from scratch, implementing complex physics and smooth animations.</p>
+                    <p style="margin-top: 1rem; font-size: 0.9em; color: #888;">Over 200 developers from 30+ countries participated, pushing their limits to create authentic web-swinging mechanics, wall-crawling abilities, and combat systems.</p>
+                    <div style="margin-top: 1rem; padding: 1rem; background: rgba(255,255,255,0.05); border-radius: 10px;">
+                        <h4 style="color: #ff4d4d; margin-bottom: 0.5rem;">Competition Timeline:</h4>
+                        <ul style="list-style: none; padding: 0;">
+                            <li style="margin-bottom: 0.5rem; font-size: 0.9em;">
+                                <span style="color: #f9cb28;">Week 1:</span> Core mechanics implementation
+                            </li>
+                            <li style="margin-bottom: 0.5rem; font-size: 0.9em;">
+                                <span style="color: #f9cb28;">Week 2:</span> Polish, optimization & submission
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="competition-card">
+                    <h3>Skills Required</h3>
+                    <p>Game physics, character controls, collision detection, and creative problem-solving. Participants needed to demonstrate mastery of Python game development, implementing realistic physics engines and smooth character animations.</p>
+                </div>
+                <div class="competition-card">
+                    <h3>Technical Stack</h3>
+                    <p>Python game development with advanced physics and animation implementations. The project required expertise in Pygame, vector mathematics, and state management to create a polished gaming experience.</p>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer>
-        <p>© 2024 Exotic Services. All rights reserved.</p>
-        <div class="social-icons">
-            <a href="https://discord.gg/8kgBUsAsBA" target="_blank">Discord</a>
-            <a href="#" target="_blank">LinkedIn</a>
-            <a href="#" target="_blank">Twitter</a>
+    <!-- Winner Section -->
+    <section class="winner">
+        <div class="container">
+            <div class="winner-content">
+            <div class="winner-image">
+                <div class="profile-image-container">
+                    <img src="https://i.postimg.cc/3NBsRKHZ/image-removebg-preview-2.png" alt="Ismael P" class="profile-image">
+                </div>
+            </div>
+                <div class="winner-details">
+                    <h2>Meet Our Winner</h2>
+                    <h3>Ismael P</h3>
+                    <p>Creator of an exceptional Spider-Man clone that showcased outstanding technical skills and creativity. His implementation stood out with perfectly tuned physics, smooth animations, and innovative gameplay mechanics that captured the essence of Spider-Man's movements.</p>
+                    <p style="margin-top: 1rem; color: #888;">Completing the project in just 10 days, Ismael demonstrated exceptional problem-solving skills and attention to detail, particularly in the implementation of the web-swinging mechanics.</p>
+                    
+                    <div style="margin: 2rem 0; padding: 1.5rem; background: rgba(255,255,255,0.05); border-radius: 15px;">
+                        <h4 style="color: #ff4d4d; margin-bottom: 1rem;">Project Highlights</h4>
+                        <ul style="list-style: none; padding: 0;">
+                            <li style="margin-bottom: 0.8rem; display: flex; align-items: center;">
+                                <span style="color: #f9cb28; margin-right: 0.5rem;">▹</span>
+                                <span>Advanced physics engine with realistic momentum and gravity effects</span>
+                            </li>
+                            <li style="margin-bottom: 0.8rem; display: flex; align-items: center;">
+                                <span style="color: #f9cb28; margin-right: 0.5rem;">▹</span>
+                                <span>Smooth character animations with 60+ unique frames</span>
+                            </li>
+                            <li style="margin-bottom: 0.8rem; display: flex; align-items: center;">
+                                <span style="color: #f9cb28; margin-right: 0.5rem;">▹</span>
+                                <span>Optimized performance: 60+ FPS on standard hardware</span>
+                            </li>
+                            <li style="display: flex; align-items: center;">
+                                <span style="color: #f9cb28; margin-right: 0.5rem;">▹</span>
+                                <span>Clean, well-documented code with modular architecture</span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="prize-card">
+                        <h3>Grand Prize Package</h3>
+                        <div style="display: flex; justify-content: space-between; margin: 1rem 0;">
+                            <div>
+                                <p style="font-weight: 600;">MacBook M1 Pro</p>
+                                <p style="color: #888; font-size: 0.9em;">16-inch, 16GB RAM, 512GB SSD</p>
+                            </div>
+                            <div style="text-align: right;">
+                                <p style="font-weight: 600;">Value</p>
+                                <p style="color: #f9cb28;">£2,500</p>
+                            </div>
+                        </div>
+                        <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.1);">
+                            <p style="font-size: 0.9em; color: #888;">Additional Benefits:</p>
+                            <ul style="list-style: none; padding: 0; margin-top: 0.5rem;">
+                                <li style="font-size: 0.9em; margin-bottom: 0.3rem;">• 1-year Hackercoder Pro Membership</li>
+                                <li style="font-size: 0.9em; margin-bottom: 0.3rem;">• Featured Developer Profile</li>
+                                <li style="font-size: 0.9em;">• Exclusive Mentorship Opportunity</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <a href="https://github.com/snootysteppes/spiderclone/" class="github-button" target="_blank">View Project</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer style="background: #0a0a0a; padding: 4rem 0; border-top: 1px solid rgba(255,255,255,0.1);">
+        <div class="container">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 3rem;">
+                <div>
+                    <h4 style="color: #ff4d4d; margin-bottom: 1rem;">About Hackercoder</h4>
+                    <p style="color: #888; font-size: 0.9em; line-height: 1.6;">A premier coding competition platform fostering innovation in game development. Our challenges have launched careers and inspired breakthrough technologies.</p>
+                </div>
+                <div>
+                    <h4 style="color: #ff4d4d; margin-bottom: 1rem;">Competition Partners</h4>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="color: #888; margin-bottom: 0.5rem; font-size: 0.9em;">• Python Software Foundation</li>
+                        <li style="color: #888; margin-bottom: 0.5rem; font-size: 0.9em;">• Game Developers Association</li>
+                        <li style="color: #888; font-size: 0.9em;">• Tech Innovation Hub London</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 style="color: #ff4d4d; margin-bottom: 1rem;">Competition Stats</h4>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="color: #888; margin-bottom: 0.5rem; font-size: 0.9em;">• 30+ Countries Represented</li>
+                        <li style="color: #888; margin-bottom: 0.5rem; font-size: 0.9em;">• 48 Hours of Live Workshops</li>
+                        <li style="color: #888; font-size: 0.9em;">• 12 Industry Mentors</li>
+                    </ul>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1);">
+                <p style="color: #888; font-size: 0.9em;">© 2023 Hackercoder. All rights reserved.</p>
+                <p style="color: #888; font-size: 0.8em; margin-top: 0.5rem;">Next competition registration opens December 2023</p>
+            </div>
         </div>
     </footer>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <script>
-        // GSAP Animations
+        // Initialize GSAP
         gsap.registerPlugin(ScrollTrigger);
 
-        // Product cards reveal
-        gsap.utils.toArray('.product-card').forEach(card => {
-            gsap.from(card, {
-                scrollTrigger: {
-                    trigger: card,
-                    start: 'top 80%'
-                },
-                opacity: 0,
-                y: 50,
-                duration: 0.8,
-                ease: 'power3.out'
-            });
-        });
-
-        // Features animation
-        gsap.from('.feature-item', {
-            scrollTrigger: {
-                trigger: '#features',
-                start: 'top 70%'
-            },
-            opacity: 0,
-            y: 30,
-            stagger: 0.2,
-            duration: 0.8,
+        // Hero Animation
+        gsap.to('.hero-content', {
+            opacity: 1,
+            y: 0,
+            duration: 1,
             ease: 'power3.out'
         });
 
-        // Receipt image zoom
-        gsap.to('.receipt-image img', {
+        // Competition Section Animation
+        gsap.to('.competition-content', {
             scrollTrigger: {
-                trigger: '.receipt-image',
-                start: 'top bottom',
-                end: 'bottom top',
-                scrub: 1
+                trigger: '.competition',
+                start: 'top center',
+                toggleActions: 'play none none reverse'
             },
-            scale: 1.2,
-            ease: 'none'
+            opacity: 1,
+            y: 0,
+            duration: 1,
+            ease: 'power3.out'
         });
+
+        // Winner Section Animation
+        gsap.to('.winner-content', {
+            scrollTrigger: {
+                trigger: '.winner',
+                start: 'top center',
+                toggleActions: 'play none none reverse'
+            },
+            opacity: 1,
+            y: 0,
+            duration: 1,
+            ease: 'power3.out'
+        });
+
+
+        // Particle Animation
+        function createParticles() {
+            const particles = document.querySelector('.particles');
+            const particleCount = 50;
+
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                
+                // Random size between 2-4px
+                const size = Math.random() * 2 + 2;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                
+                // Random position
+                particle.style.left = `${Math.random() * 100}%`;
+                particle.style.top = `${Math.random() * 100}%`;
+                
+                particles.appendChild(particle);
+                
+                // Animate particle
+                gsap.to(particle, {
+                    y: `${Math.random() * 200 - 100}`,
+                    x: `${Math.random() * 200 - 100}`,
+                    duration: Math.random() * 3 + 2,
+                    repeat: -1,
+                    yoyo: true,
+                    ease: 'none'
+                });
+            }
+        }
+
+        createParticles();
+
+        // Initialize countUp animations
+        const participantsCounter = new countUp.CountUp('participants', 200, { 
+            suffix: '+',
+            duration: 2.5,
+            useEasing: true
+        });
+        const daysCounter = new countUp.CountUp('days', 14, { 
+            duration: 2,
+            useEasing: true
+        });
+        const prizeCounter = new countUp.CountUp('prize', 5, { 
+            prefix: '£',
+            suffix: 'K',
+            duration: 3,
+            useEasing: true
+        });
+
+        // Start countUp animations when elements are in view
+        const observerOptions = {
+            threshold: 0.5
+        };
+
+        // Start countup animations immediately for hero section
+        participantsCounter.start();
+        daysCounter.start();
+        prizeCounter.start();
+
+        // Add number animation class
+        document.querySelectorAll('#participants, #days, #prize').forEach(el => {
+            el.style.transition = 'all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+            el.addEventListener('mouseover', () => {
+                el.style.transform = 'scale(1.1)';
+            });
+            el.addEventListener('mouseout', () => {
+                el.style.transform = 'scale(1)';
+            });
+        });
+
+        // Prize card and button animations
+        gsap.to('.prize-card', {
+            boxShadow: '0 0 30px rgba(255, 77, 77, 0.3)',
+            duration: 1.5,
+            repeat: -1,
+            yoyo: true
+        });
+
+        // Add hover animation for competition cards
+        document.querySelectorAll('.competition-card').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                gsap.to(card, {
+                    scale: 1.02,
+                    duration: 0.3,
+                    ease: 'power2.out'
+                });
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                gsap.to(card, {
+                    scale: 1,
+                    duration: 0.3,
+                    ease: 'power2.out'
+                });
+            });
+        });
+
+        // Initialize confetti effect
+        window.onload = function() {
+            // Initial burst
+            confetti({
+                particleCount: 100,
+                spread: 70,
+                origin: { y: 0.6 }
+            });
+
+            // Continuous side effects
+            const duration = 3 * 1000;
+            const end = Date.now() + duration;
+            const colors = ['#ff4d4d', '#f9cb28', '#ffffff'];
+
+            (function frame() {
+                confetti({
+                    particleCount: 2,
+                    angle: 60,
+                    spread: 55,
+                    origin: { x: 0 },
+                    colors: colors
+                });
+                confetti({
+                    particleCount: 2,
+                    angle: 120,
+                    spread: 55,
+                    origin: { x: 1 },
+                    colors: colors
+                });
+
+                if (Date.now() < end) {
+                    requestAnimationFrame(frame);
+                }
+            }());
+        };
     </script>
 </body>
 </html>
